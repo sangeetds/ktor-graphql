@@ -8,7 +8,7 @@ data class Director(
   val age: Int
 ) {
   companion object {
-    suspend fun search(id: ID) = directors.find { it.id == id }
+    suspend fun searchById(id: ID) = directors.find { it.id == id }
   }
 }
 

@@ -5,5 +5,5 @@ import com.expediagroup.graphql.server.operations.Query
 
 class DirectorQueryService : Query {
 
-  suspend fun searchById(id: ID) = Director.search(id)
+  suspend fun searchDirectorById(id: ID) = Director.searchById(id)
 }

@@ -9,7 +9,7 @@ data class Movie(
   val directorId: ID
 ) {
   companion object {
-    suspend fun search(id: ID) = movies.find { it.id == id }
+    suspend fun searchMovie(id: ID) = movies.find { it.id == id }
   }
 }
 

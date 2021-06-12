@@ -36,9 +36,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     // Ktor
-    implementation "io.ktor:ktor-server-core:$ktor_version"
     implementation "io.ktor:ktor-server-netty:$ktor_version"
-    implementation "io.ktor:ktor-serialization:$ktor_version"
 
     // Expedia-GraphQL
     implementation "com.expediagroup:graphql-kotlin-server:$expedia_grapql_version"
@@ -54,16 +52,5 @@ graphql {
     schema {
         packages = ["com.example"]
     }
-    client {
-        endpoint = "http://localhost:8080/graphql"
-    }
-}
-
-graphqlDownloadSDL {
-    endpoint = "http://localhost:8080/sdl"
-}
-
-graphqlIntrospectSchema {
-    endpoint = "http://localhost:8080/graphql"
 }
 
