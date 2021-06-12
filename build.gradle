@@ -1,3 +1,5 @@
+import com.expediagroup.graphql.plugin.gradle.tasks.GraphQLGenerateSDLTask
+
 buildscript {
     repositories {
         jcenter()
@@ -5,11 +7,13 @@ buildscript {
     
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.expediagroup:graphql-kotlin-gradle-plugin:$expedia_grapql_version"
     }
 }
 
 apply plugin: 'kotlin'
 apply plugin: 'application'
+apply plugin: 'com.expediagroup.graphql'
 
 group 'com.example'
 version '0.0.1'
@@ -28,12 +32,38 @@ repositories {
 }
 
 dependencies {
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
+    // Ktor
+    implementation "io.ktor:ktor-server-core:$ktor_version"
     implementation "io.ktor:ktor-server-netty:$ktor_version"
     implementation "io.ktor:ktor-serialization:$ktor_version"
 
+    // Expedia-GraphQL
+    implementation "com.expediagroup:graphql-kotlin-server:$expedia_grapql_version"
+    implementation "com.expediagroup:graphql-kotlin-schema-generator:$expedia_grapql_version"
+
     implementation "ch.qos.logback:logback-classic:$logback_version"
 
+    // Tests
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }
+
+graphql {
+    schema {
+        packages = ["com.example"]
+    }
+    client {
+        endpoint = "http://localhost:8080/graphql"
+    }
+}
+
+graphqlDownloadSDL {
+    endpoint = "http://localhost:8080/sdl"
+}
+
+graphqlIntrospectSchema {
+    endpoint = "http://localhost:8080/graphql"
+}
+
